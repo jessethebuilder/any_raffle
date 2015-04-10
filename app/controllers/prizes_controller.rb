@@ -53,6 +53,6 @@ class PrizesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def prize_params
-      params.require(:prize).permit(:ticket_id, :name, :description, :value, :cost)
+      params.require(:prize).permit(:raffle_id, :name, :description, :value, :cost)
     end
 end

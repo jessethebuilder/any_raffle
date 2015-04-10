@@ -38,6 +38,9 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
+  config.expect_with :rspec do |c|
+    c.syntax = :expect, :should
+  end
 
 #  require 'support/request_helper'
 #  config.include RequestHelper

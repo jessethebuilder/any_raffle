@@ -3,6 +3,8 @@ class Raffle < ActiveRecord::Base
 
   has_many :tickets
 
+  has_many :prizes
+
   validates :title, presence: true
 
   validates :description, presence: true

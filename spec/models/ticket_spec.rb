@@ -10,6 +10,8 @@ RSpec.describe Ticket, type: :model do
 
   describe 'Associations' do
     it{ should belong_to :raffle }
+
+    it{ should have_one :prize }
   end
 
   describe 'Idioms' do

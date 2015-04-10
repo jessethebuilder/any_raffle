@@ -15,6 +15,8 @@ RSpec.describe Raffle, type: :model do
     it{ should belong_to :user }
 
     it{ should have_many :tickets }
+
+    it{ should have_many :prizes }
   end
 
   describe 'Methods' do

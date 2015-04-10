@@ -1,6 +1,8 @@
 class Ticket < ActiveRecord::Base
   belongs_to :raffle
 
+  has_one :prize
+
   validates :raffle_id, presence: true
 
   validates :email, presence: true
