@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @raffle.user_id %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @raffle.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @raffle.description %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= @raffle.image %>
+</p>
+
+<p>
+  <strong>End time:</strong>
+  <%= @raffle.end_time %>
+</p>
+
+<p>
+  <strong>Slug:</strong>
+  <%= @raffle.slug %>
+</p>
+
+<p>
+  <strong>Ticket price:</strong>
+  <%= @raffle.ticket_price %>
+</p>
+
+<%= link_to 'Edit', edit_raffle_path(@raffle) %> |
+<%= link_to 'Back', raffles_path %>

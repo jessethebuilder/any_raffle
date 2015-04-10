@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ticket:</strong>
+  <%= @prize.ticket_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @prize.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @prize.description %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @prize.value %>
+</p>
+
+<p>
+  <strong>Cost:</strong>
+  <%= @prize.cost %>
+</p>
+
+<%= link_to 'Edit', edit_prize_path(@prize) %> |
+<%= link_to 'Back', prizes_path %>

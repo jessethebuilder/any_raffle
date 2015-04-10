@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @ticket.email %>
+</p>
+
+<p>
+  <strong>Winner:</strong>
+  <%= @ticket.winner %>
+</p>
+
+<p>
+  <strong>Raffle:</strong>
+  <%= @ticket.raffle_id %>
+</p>
+
+<%= link_to 'Edit', edit_ticket_path(@ticket) %> |
+<%= link_to 'Back', tickets_path %>
