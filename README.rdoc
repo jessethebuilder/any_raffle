@@ -1,6 +1,7 @@
 == AnyRaffle
 = Intro
 - AnyRaffle is a simple app that lets anyone set up a raffle for any cause they like.
+ - Sign up as a User
  - Create a raffle
  - Share via URL
  - Collect ticket revenue with PayPal
