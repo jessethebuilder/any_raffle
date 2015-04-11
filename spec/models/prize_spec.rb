@@ -8,7 +8,7 @@ RSpec.describe Prize, type: :model do
   end
 
   describe 'Associations' do
-    it{ should belong_to :ticket }
+    it{ should have_one :ticket }
     it{ should belong_to :raffle }
   end
 

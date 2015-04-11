@@ -12,12 +12,19 @@ FactoryGirl.define do
     ticket_price Random.rand(0..1000.0)
   end
 
+  factory :prize do
+    raffle
+    name Faker::Commerce.product_name
+  end
+
   factory :ticket do
     raffle
     email
 
     factory :winning_ticket do
-      winner true
+      after(:build) do |tix, e|
+        tix.prize = build(:prize)
+      end
     end
   end
 end

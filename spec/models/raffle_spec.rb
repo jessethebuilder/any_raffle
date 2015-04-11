@@ -31,22 +31,15 @@ RSpec.describe Raffle, type: :model do
         raffle.pick.class.should == Ticket
       end
 
-      it 'returned ticket should be saved as a winner' do
-        raffle.pick.winner.should == true
-      end
-
       it 'should not return a ticket that has already marked as a winner' do
-        winning_ticket = build :ticket
-        winning_ticket.winner = true
-        winning_ticket.save
-
+        create(:winning_ticket)
         #since there is 2 tickets, and one is already a winner, the other ticket will be picked
         raffle.pick.should == ticket
       end
 
       it 'should return nil if all tickets are winners' do
-        raffle.pick.should == ticket
-
+        ticket.prize = create(:prize)
+        ticket.save!
         #no tickets left
         raffle.pick.should == nil
       end

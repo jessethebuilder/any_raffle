@@ -1,12 +1,20 @@
 class Ticket < ActiveRecord::Base
   belongs_to :raffle
 
-  has_one :prize
+  belongs_to :prize
 
   validates :raffle_id, presence: true
 
   validates :email, presence: true
 
-  scope :winners, -> { where(winner: true) }
-  scope :not_winners, -> { where(winner: false) }
+  scope :winners, -> { where.not(prize_id: nil) }
+  scope :not_winners, -> { where(prize_id: nil) }
+
+  def winner?
+    not self.prize.nil?
+  end
+
+  def price
+    raffle.ticket_price
+  end
 end

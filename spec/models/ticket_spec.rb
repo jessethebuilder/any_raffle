@@ -11,12 +11,26 @@ RSpec.describe Ticket, type: :model do
   describe 'Associations' do
     it{ should belong_to :raffle }
 
-    it{ should have_one :prize }
+    it{ should belong_to :prize }
+  end
+
+  describe 'Methods' do
+    describe '#winner?' do
+      specify 'A new Ticket should not be a winner' do
+        Ticket.new.winner?.should == false
+      end
+    end
+
+    describe '#price' do
+      it 'should return :ticket_price of the associated raffle' do
+        ticket.price.should == ticket.raffle.ticket_price
+      end
+    end
   end
 
   describe 'Idioms' do
     specify 'Default value for winner should be false' do
-      Ticket.new.winner.should == false
+      Ticket.new.winner?.should == false
     end
   end
 
@@ -27,10 +41,20 @@ RSpec.describe Ticket, type: :model do
         ticket.save!
       end
 
+      describe 'And Prizes' do
+        it 'should return a join table of tickets and prices' do
+
+        end
+
+        it 'should not return tickets that are not in the scope' do
+
+        end
+      end
+
       describe 'Winners' do
         it 'should return only winners' do
           Ticket.winners.count.should == 1
-          Ticket.winners.first.winner.should == true
+          Ticket.winners.first.winner?.should == true
         end
 
         it 'should return only those tickets on a raffle, when called from association' do

@@ -14,11 +14,6 @@ class Raffle < ActiveRecord::Base
   use_farm_slugs id_method: :title
 
   def pick
-    tix = tickets.not_winners.sample
-    if tix
-      tix.winner = true
-      tix.save
-    end
-    tix
+   tickets.not_winners.sample
   end
 end
