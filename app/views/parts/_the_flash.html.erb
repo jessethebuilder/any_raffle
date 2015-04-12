@@ -1,0 +1,33 @@
+<% if alert -%>
+  <div class="flash alert container">
+    <div class="row">
+      <div class="col-xs-12">
+        <button class="close">x close</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <h4><%= alert %></h4>
+      </div>
+    </div>
+  </div>
+<% end -%>
+
+<% if notice -%>
+  <div class="flash notice container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h4><%= notice %></h4>
+      </div>
+    </div>
+  </div>
+<% end -%>
+
+<% if notice || alert -%>
+  <script>
+    $('.flash .close').click(function(){
+      $(this).closest('.flash').slideUp(1000);
+    })
+  </script>
+<% end -%>

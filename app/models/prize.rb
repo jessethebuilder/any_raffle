@@ -8,6 +8,12 @@ class Prize < ActiveRecord::Base
   validates :name, presence: true
 
   def pick_winner
+    self.ticket = raffle.pick
+    self.save
+    self.ticket
+  end
 
+  def winner_selected?
+    Ticket.where(:prize_id => id).first ? true : false
   end
 end
