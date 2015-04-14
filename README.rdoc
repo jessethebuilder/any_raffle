@@ -6,3 +6,5 @@
  - Share via URL
  - Collect ticket revenue with PayPal
  - Select winners
+= Setup
+- Setup AWS for fog storage of images (see /config/initializers/aws.rb)

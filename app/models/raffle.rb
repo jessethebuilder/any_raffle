@@ -5,13 +5,13 @@ class Raffle < ActiveRecord::Base
 
   has_many :prizes
 
-  validates :title, presence: true
-
   validates :description, presence: true
 
   validates :ticket_price, presence: true, numericality: {:greater_than_or_equal_to => 0}
 
   use_farm_slugs id_method: :title
+
+  mount_uploader :image, ImageUploader
 
   def pick
    tickets.not_winners.sample
