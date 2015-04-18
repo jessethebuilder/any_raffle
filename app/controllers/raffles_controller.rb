@@ -53,6 +53,7 @@ class RafflesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def raffle_params
-      params.require(:raffle).permit(:user_id, :title, :description, :image, :end_time, :ticket_price)
+      params.require(:raffle).permit(:user_id, :title, :description, :image, :end_time, :ticket_max, :ticket_price,
+                                     :image, :remote_image_url, :image_cache)
     end
 end

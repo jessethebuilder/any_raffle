@@ -25,7 +25,8 @@ RSpec.describe RafflesController, type: :controller do
   # adjust the attributes here as well.
   let(:valid_attributes) { {:title => Faker::Commerce.product_name,
                             :description => Faker::Lorem.paragraphs(paragraph_count = Random.rand(1..10)).join('<br>'),
-                            :ticket_price => Random.rand(0..10000.0)} }
+                            :ticket_price => Random.rand(0..10000.0),
+                            :end_time => (Time.now + Random.rand(1..1000.hours))} }
 
   let(:invalid_attributes) { {:title => ''} }
   let(:valid_session) { {} }

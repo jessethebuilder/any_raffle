@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150410222847) do
+ActiveRecord::Schema.define(version: 20150415232250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,6 +111,7 @@ ActiveRecord::Schema.define(version: 20150410222847) do
     t.float    "ticket_price"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "ticket_max"
   end
 
   create_table "social_networking_profiles", force: :cascade do |t|

@@ -26,6 +26,7 @@ describe 'Farm Slugs Requests', :type => :feature do
         fill_in 'Title', with: title
         fill_in 'Description', with: 'Some Text'
         fill_in 'Ticket price', with: Random.rand(0..1000.0)
+        fill_in 'Total number of tickets to sell', with: Random.rand(1..10000)
         click_button 'Create'
 
         visit "/raffles/a-special-title"

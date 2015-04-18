@@ -11,6 +11,17 @@ FactoryGirl.define do
     description Faker::Lorem.paragraphs(paragrapsh_count = Random.rand(1..10)).join('<br>')
     ticket_price Random.rand(0..1000.0)
 
+    #a Raffle must have an end_time and/or a ticket_max must be specified. Here we make it random
+    case Random.rand(1..3)
+      when 1
+        end_time Time.now + Random.rand(1..10000).minutes
+      when 2
+        ticket_max Random.rand(1..100000)
+      when 3
+        end_time Time.now + Random.rand(1..10000).minutes
+        ticket_max Random.rand(1..100000)
+    end
+
     # factory :raffle_with_image do
     #   image Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/support/test_image.jpg')))
     # end

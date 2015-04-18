@@ -1,53 +1,76 @@
-  <%= form_for(@raffle) do |f| %>
-    <div class="row">
-      <div class="col-sm-12">
-        <%= error_explanation(@raffle) %>
-      </div><!-- col -->
-    </div><!-- row -->
+<%= form_for(@raffle) do |f| %>
+  <div class="row">
+    <div class="col-sm-12">
+      <%= error_explanation(@raffle) %>
+    </div><!-- col -->
+  </div><!-- row -->
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <%= f.label :title, class: 'control-label' %>
+        <%#= f.text_field :title, class: 'form-control', required: true %>
+        <%= f.text_field :title, class: 'form-control'%>
+      </div>
+    </div><!-- col -->
+    <div class="col-sm-4">
+      <div class="form-group">
+        <%= f.label :ticket_price, class: 'control-label' %>
+        <%= f.text_field :ticket_price, class: 'form-control' %>
+      </div>
+    </div><!-- col -->
+    <div class="col-sm-4">
+    </div><!-- col -->
+  </div><!-- row -->
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= f.label :end_time, class: 'control-label'  %>
+        <div id="dt_picker" class="input-group date">
+          <%= f.text_field :end_time, class: 'form-control' %>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div><!-- input-group-->
+      </div><!-- form-group -->
+    </div><!-- col -->
 
-    <div class="row">
-      <div class="col-sm-4">
-        <div class="form-group">
-          <%= f.label :title, class: 'control-label' %>
-          <%= f.text_field :title, class: 'form-control', required: true %>
-        </div>
-      </div><!-- col -->
-
-      <div class="col-sm-4">
-        <div class="form-group">
-          <%= f.label :ticket_price, class: 'control-label' %>
-          <%= f.text_field :ticket_price, class: 'form-control' %>
-        </div>
-      </div><!-- col -->
-      <div class="col-sm-4">
-        <div class="form-group">
-          <%= f.label :end_time, class: 'control-label'  %>
-          <%= f.datetime_select :end_time, class: 'form-control' %>
-        </div>
-      </div><!-- col -->
-    </div><!-- row -->
-
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="form-group">
-          <%= f.label :description, class: 'control-label' %>
-          <%= f.bootsy_area :description, class: 'form-control' %>
-        </div>
-      </div><!-- col -->
-    </div><!-- row -->
-
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="form-group">
-          <%= f.submit class: 'btn btn-primary' %>
-        </div>
-      </div><!-- col -->
-    </div><!-- row -->
+    <div class="col-sm-2">
+      <h2 class="text-center"> Or
+        <%#= express_popover('Or', 'You may specify a time to end the raffle or a total number of tickets to sell
+                                   before the raffle ends. Or you may specify both, in which case the event that happens
+                                    first will end the raffle', ) %>
+      </h2>
+    </div><!-- col -->
+    <div class="col-sm-4">
+      <div class="form-group">
+        <%= f.label :ticket_max, 'Total number of tickets to sell', class: 'control-label' %>
+        <%= f.text_field :ticket_max, class: 'form-control' %>
+      </div>
+    </div><!--col -->
+  </div><!-- row -->
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-group">
+        <%= f.label :description, class: 'control-label' %>
+        <%= f.bootsy_area :description, class: 'form-control' %>
+      </div>
+    </div><!-- col -->
+  </div><!-- row -->
+  <%= image_select f, :image %><!-- row -->
 
 
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-group">
+        <%= f.submit class: 'btn btn-primary' %>
+      </div>
+    </div><!-- col -->
+  </div><!-- row -->
+<% end %><!-- form -->
 
-    <div class="form-group">
-      <%= f.label :image %>
-      <%= f.text_field :image %>
-    </div>
-  <% end %><!-- form -->
+<script>
+  $(function(){
+    $('#dt_picker').datetimepicker();
+    $('.express_popover').popover();
+  });
+</script>

@@ -30,6 +30,7 @@ describe 'New Raffle Requests', :type => :feature do
       description = Faker::Lorem.paragraphs(paragraph_count = Random.rand(1..10)).join('<br><br>')
       fill_in 'Description', with: description
       fill_in 'Ticket price', with: 1.00
+      fill_in 'End time', with: Time.now + Random.rand(1..1000).hours
       expect{ click_button 'Create' }.to change{ Raffle.count }.by(1)
 
       r = Raffle.last

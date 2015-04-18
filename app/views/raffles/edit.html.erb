@@ -1,6 +1,4 @@
-<h1>Editing Raffle</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @raffle %> |
-<%= link_to 'Back', raffles_path %>
+<div class="container" id="edit_raffle">
+  <h1>Editing <%= link_to @raffle.title, @raffle %></h1>
+  <%= render 'form' %>
+</div>

@@ -9,6 +9,27 @@ RSpec.describe Raffle, type: :model do
 
     it{ should validate_presence_of :ticket_price }
     it{ should validate_numericality_of(:ticket_price).is_greater_than_or_equal_to(0) }
+
+    it{ should validate_numericality_of(:ticket_max).is_greater_than_or_equal_to(1) }
+
+    describe ':end_time validations' do
+      before(:each) do
+        raffle.ticket_max = nil
+      end
+
+      it 'should be a parseable date' do
+        # A non-parseable date will be rejected, because the db column is datetime.
+        # This is a little hacky, but whatever right now.
+
+      end
+    end
+
+    it 'should validate that there is a :max_tickets or :end_time' do
+      raffle.ticket_max = nil
+      raffle.end_time = nil
+      raffle.valid?.should == false
+      raffle.errors.messages[:end_time].include?("and/or total number of tickets to sell can't be blank").should == true
+    end
   end
 
   describe 'Associations' do
