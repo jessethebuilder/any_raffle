@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :prizes
-  resources :tickets
+  resources :tickets, :except => [:destroy]
   resources :raffles
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.

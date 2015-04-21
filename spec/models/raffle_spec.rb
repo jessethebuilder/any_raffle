@@ -12,6 +12,8 @@ RSpec.describe Raffle, type: :model do
 
     it{ should validate_numericality_of(:ticket_max).is_greater_than_or_equal_to(1) }
 
+    it{ should validate_presence_of :user_id }
+
     describe ':end_time validations' do
       before(:each) do
         raffle.ticket_max = nil
@@ -20,7 +22,28 @@ RSpec.describe Raffle, type: :model do
       it 'should be a parseable date' do
         # A non-parseable date will be rejected, because the db column is datetime.
         # This is a little hacky, but whatever right now.
+        raffle.end_time = 'a'
+        raffle.valid?.should == false
 
+        raffle.end_time = (Time.now + Random.rand(1..10000).minutes).to_s
+        raffle.valid?.should == true
+      end
+
+      specify 'on CREATE, should only accept a datetime AFTER now' do
+        r = build(:raffle)
+        r.end_time = Time.now.to_s
+        r.valid?.should == false
+        r.errors[:end_time].include?('must be in the future').should == true
+      end
+
+      specify 'on SAVE, will accept a datetime AFTER now' do
+        # This is a contrived example to show that the Raffles can be saved with an end time before now
+        r = build(:raffle)
+        r.end_time = nil
+        r.ticket_max = 1
+        r.save!
+        r.end_time = Time.now
+        r.valid?.should == true
       end
     end
 
@@ -30,7 +53,38 @@ RSpec.describe Raffle, type: :model do
       raffle.valid?.should == false
       raffle.errors.messages[:end_time].include?("and/or total number of tickets to sell can't be blank").should == true
     end
-  end
+
+    describe 'Validations for an Active raffle' do
+      specify '#end_time cannot be changed after an raffle is active' do
+        raffle.end_time = Time.now + Random.rand(1..10000).hours
+        raffle.valid?.should == true
+
+        raffle.end_time = Time.now + Random.rand(1..10000).hours
+        raffle.valid?.should == true
+
+        raffle.tickets << create(:ticket)
+        raffle.end_time = Time.now + Random.rand(1..10000).hours
+        raffle.valid?.should == false
+        raffle.errors[:end_time].include?("can't be changed after a raffle has begun").should == true
+      end
+
+      specify '#ticket_max cannot be changed after a raffle is active' do
+        raffle.ticket_max = Random.rand(1..100000)
+        raffle.valid?.should == true
+
+        raffle.tickets << create(:ticket)
+        raffle.ticket_max = Random.rand(1..10000)
+        raffle.valid?.should == false
+        raffle.errors[:ticket_max].include?("can't be changed after a raffle has begun")
+      end
+
+      specify 'A Raffle cannot be deleted, after a ticket has sold' do
+        raffle.tickets << create(:ticket)
+        raffle.destroyed?.should == false
+        # raffle.errors[:base].include?("can't delete raffle once it is active").should == true
+      end
+    end
+  end #Validations
 
   describe 'Associations' do
     it{ should belong_to :user }
@@ -43,11 +97,11 @@ RSpec.describe Raffle, type: :model do
   describe 'Methods' do
     let(:ticket){ build :ticket }
 
-    before(:each) do
-      raffle.tickets << ticket
-    end
-
     describe '#pick' do
+      before(:each) do
+        raffle.tickets << ticket
+      end
+
       it 'should return a ticket' do
         raffle.pick.class.should == Ticket
       end
@@ -64,7 +118,15 @@ RSpec.describe Raffle, type: :model do
         #no tickets left
         raffle.pick.should == nil
       end
-    end
+    end #pick
+
+    describe '#active?' do
+      specify 'a Raffle is "active" once a ticket has been sold' do
+        raffle.active?.should == false
+        raffle.tickets << ticket
+        raffle.active?.should == true
+      end
+    end #active
   end #Methods
 
 

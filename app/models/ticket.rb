@@ -7,6 +7,10 @@ class Ticket < ActiveRecord::Base
 
   validates :email, presence: true
 
+  before_destroy do
+    false
+  end
+
   scope :winners, -> { where.not(prize_id: nil) }
   scope :not_winners, -> { where(prize_id: nil) }
 

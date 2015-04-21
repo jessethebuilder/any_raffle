@@ -26,16 +26,22 @@ RSpec.describe RafflesController, type: :controller do
   let(:valid_attributes) { {:title => Faker::Commerce.product_name,
                             :description => Faker::Lorem.paragraphs(paragraph_count = Random.rand(1..10)).join('<br>'),
                             :ticket_price => Random.rand(0..10000.0),
-                            :end_time => (Time.now + Random.rand(1..1000.hours))} }
+                            :end_time => (Time.now + Random.rand(1..1000.hours)),
+                            :user_id => 1} }
 
   let(:invalid_attributes) { {:title => ''} }
   let(:valid_session) { {} }
 
   describe "GET #index" do
-    it "assigns all raffles as @raffles" do
+    it "assigns all raffles as @raffles, for a URL with no additional parameters" do
       raffle = Raffle.create! valid_attributes
       get :index, {}, valid_session
       expect(assigns(:raffles)).to eq([raffle])
+    end
+
+    it "assigns raffles associated with user, if the URL looks like /raffles/a-user-name" do
+      # raffle1 = Raffle.create! valid_attributes
+      # get :index, {:user_name => raffle1.name }
     end
   end
 
@@ -48,6 +54,12 @@ RSpec.describe RafflesController, type: :controller do
   end
 
   describe "GET #new" do
+    it 'cannot be accessed unless user is signed in' do
+      get :new, {}, valid_session
+      expect(response).to redirect_to(:back)
+      expect(assigns(:raffle)).to be_nil
+    end
+
     it "assigns a new raffle as @raffle" do
       get :new, {}, valid_session
       expect(assigns(:raffle)).to be_a_new(Raffle)
@@ -99,7 +111,9 @@ RSpec.describe RafflesController, type: :controller do
     context "with valid params" do
       let(:new_attributes) { {:title => 'Cool Title',
                               :description => Faker::Lorem.paragraphs(paragraph_count = Random.rand(1..10)).join('<br>'),
-                              :ticket_price => Random.rand(0..10000.0)} }
+                              :ticket_price => Random.rand(0..10000.0),
+                              :end_time => (Time.now + Random.rand(1..1000.hours)),
+                              :user_id => 1} }
 
       it "updates the requested raffle" do
         raffle = Raffle.create! valid_attributes

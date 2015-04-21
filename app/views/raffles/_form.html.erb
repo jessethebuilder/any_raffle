@@ -4,6 +4,9 @@
       <%= error_explanation(@raffle) %>
     </div><!-- col -->
   </div><!-- row -->
+
+  <%= f.hidden_field :user_id, val: current_user.id %>
+
   <div class="row">
     <div class="col-sm-4">
       <div class="form-group">

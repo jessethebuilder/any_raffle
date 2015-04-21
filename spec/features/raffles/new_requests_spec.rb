@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe 'New Raffle Requests', :type => :feature do
   before(:each) do
+    manual_sign_in
     visit '/raffles/new'
   end
 

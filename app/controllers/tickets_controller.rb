@@ -1,5 +1,5 @@
 class TicketsController < ApplicationController
-  before_action :set_ticket, only: [:show, :edit, :update, :destroy]
+  before_action :set_ticket, only: [:show, :edit, :update]
 
   # GET /tickets
   def index
@@ -40,10 +40,10 @@ class TicketsController < ApplicationController
   end
 
   # DELETE /tickets/1
-  def destroy
-    @ticket.destroy
-    redirect_to tickets_url, notice: 'Ticket was successfully destroyed.'
-  end
+  # def destroy
+  #   @ticket.destroy
+  #   redirect_to tickets_url, notice: 'Ticket was successfully destroyed.'
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

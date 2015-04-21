@@ -32,6 +32,12 @@ RSpec.describe Ticket, type: :model do
     specify 'Default value for winner should be false' do
       Ticket.new.winner?.should == false
     end
+
+    specify 'Tickets cannot be destroyed' do
+      ticket.save!
+      # ticket.destroy.should == false
+      ticket.destroyed?.should == false
+    end
   end
 
   describe 'Class Methods' do

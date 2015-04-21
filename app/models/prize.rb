@@ -7,6 +7,10 @@ class Prize < ActiveRecord::Base
 
   validates :name, presence: true
 
+  before_destroy do
+    self.raffle.active? ? false : true
+  end
+
   def pick_winner
     self.ticket = raffle.pick
     self.save

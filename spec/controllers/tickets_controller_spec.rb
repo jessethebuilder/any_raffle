@@ -134,20 +134,4 @@ RSpec.describe TicketsController, type: :controller do
       end
     end
   end
-
-  describe "DELETE #destroy" do
-    it "destroys the requested ticket" do
-      ticket = Ticket.create! valid_attributes
-      expect {
-        delete :destroy, {:id => ticket.to_param}, valid_session
-      }.to change(Ticket, :count).by(-1)
-    end
-
-    it "redirects to the tickets list" do
-      ticket = Ticket.create! valid_attributes
-      delete :destroy, {:id => ticket.to_param}, valid_session
-      expect(response).to redirect_to(tickets_url)
-    end
-  end
-
 end

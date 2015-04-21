@@ -7,6 +7,13 @@ RSpec.describe Prize, type: :model do
     it{ should validate_presence_of :raffle_id }
 
     it{ should validate_presence_of :name }
+
+    specify "Prize cannot be deleted once its raffle is active" do
+      prize.save!
+      prize.raffle.tickets << create(:ticket)
+      prize.destroy
+      prize.destroyed?.should == false
+    end
   end
 
   describe 'Associations' do
