@@ -32,6 +32,10 @@ RSpec.describe RafflesController, type: :controller do
   let(:invalid_attributes) { {:title => ''} }
   let(:valid_session) { {} }
 
+  describe "GET #welcome" do
+
+  end
+
   describe "GET #index" do
     it "assigns all raffles as @raffles, for a URL with no additional parameters" do
       raffle = Raffle.create! valid_attributes
@@ -56,17 +60,22 @@ RSpec.describe RafflesController, type: :controller do
   describe "GET #new" do
     it 'cannot be accessed unless user is signed in' do
       get :new, {}, valid_session
-      expect(response).to redirect_to(:back)
+      expect(response).to redirect_to('/users/sign_in')
       expect(assigns(:raffle)).to be_nil
     end
 
     it "assigns a new raffle as @raffle" do
+      login_user
       get :new, {}, valid_session
       expect(assigns(:raffle)).to be_a_new(Raffle)
     end
   end
 
   describe "GET #edit" do
+    before(:each) do
+      login_user
+    end
+
     it "assigns the requested raffle as @raffle" do
       raffle = Raffle.create! valid_attributes
       get :edit, {:id => raffle.to_param}, valid_session
@@ -75,6 +84,10 @@ RSpec.describe RafflesController, type: :controller do
   end
 
   describe "POST #create" do
+    before(:each) do
+      login_user
+    end
+
     context "with valid params" do
       it "creates a new Raffle" do
         expect {
@@ -108,6 +121,11 @@ RSpec.describe RafflesController, type: :controller do
   end
 
   describe "PUT #update" do
+
+    before(:each) do
+      login_user
+    end
+
     context "with valid params" do
       let(:new_attributes) { {:title => 'Cool Title',
                               :description => Faker::Lorem.paragraphs(paragraph_count = Random.rand(1..10)).join('<br>'),
@@ -151,6 +169,10 @@ RSpec.describe RafflesController, type: :controller do
   end
 
   describe "DELETE #destroy" do
+    before(:each) do
+      login_user
+    end
+
     it "destroys the requested raffle" do
       raffle = Raffle.create! valid_attributes
       expect {

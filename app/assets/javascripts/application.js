@@ -13,8 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require bootsy
 //= require moment
 //= require bootstrap-datetimepicker.min
-//= require turbolinks
+//= require farm_tools
+//= require bootsy
+
 //= require_tree .

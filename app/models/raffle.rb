@@ -39,9 +39,6 @@ class Raffle < ActiveRecord::Base
 
   def prevent_if_active
     self.active? ? false : true
-    # return true unless self.active?
-    # errors.add :base, "can't delete raffle once it is active"
-    # false
   end
 
   def ticket_max_or_end_time

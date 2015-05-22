@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :raffles
 
-  validates :name, :presence => true
+  # validates :name, :presence => true
 
-  use_farm_slugs
+  # use_farm_slugs
 end

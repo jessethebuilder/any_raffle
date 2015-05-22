@@ -19,6 +19,10 @@ describe 'Farm Slugs Requests', :type => :feature do
     end
 
     describe 'End to End' do
+      before(:each) do
+        manual_sign_in
+      end
+
       specify 'A newly created raffle will be findable with its slug' do
         title = 'A Special Title'
 

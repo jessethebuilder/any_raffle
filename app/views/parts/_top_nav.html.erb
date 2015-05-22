@@ -1,0 +1,48 @@
+<div id='top_nav' class='navbar navbar-fixed-top navbar-default' role='navigation'>
+  <div class="container">
+    <div class='navbar-header'>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top_nav_body">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to 'AnyRaffle', root_path, :class => 'navbar-brand' %>
+    </div>
+
+    <div id='top_nav_body' class='collapse navbar-collapse'>
+      <ul class='nav navbar-nav navbar-right'>
+        <!--<li classs="dropdown">-->
+          <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>-->
+          <!--<ul class="dropdown-menu">-->
+            <!--&lt;!&ndash;<li class="divider"></li>&ndash;&gt;-->
+          <!--</ul>-->
+        <!--</li>-->
+
+        <li>
+          <%= link_to('New Raffle', new_raffle_path) %>
+        </li>
+        <li>
+          <% if user_signed_in? %>
+              <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+          <% else %>
+              <%= link_to 'Login', new_user_session_path %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  function padBodyForTopNav(){
+    $('body').css('padding-top', $('#top_nav').height() + 1);
+
+    $(window).resize(function(){
+      $('body').css('padding-top', $('#top_nav').height() + 1);
+    })
+  }
+
+  ready_methods.push(padBodyForTopNav);
+</script>

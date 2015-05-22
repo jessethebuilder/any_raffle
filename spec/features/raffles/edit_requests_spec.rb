@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe 'Edit Requests', type: :feature do
+  let!(:user){ manual_sign_in }
+
   describe 'Editing an existing Raffle' do
     let!(:raffle){ create :raffle }
 

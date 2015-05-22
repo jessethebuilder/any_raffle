@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
+  mount Bootsy::Engine => '/bootsy', as: 'bootsy'
   resources :prizes
   resources :tickets, :except => [:destroy]
   resources :raffles
   devise_for :users
+
+  root 'raffles#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

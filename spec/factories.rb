@@ -4,13 +4,13 @@ FactoryGirl.define do
   factory :user do
     email
     password 'carltonlasiter'
-    name Faker::Company.name
+    # name Faker::Company.name
   end
 
   factory :raffle do
     user
     title Faker::Commerce.product_name
-    description Faker::Lorem.paragraphs(paragrapsh_count = Random.rand(1..10)).join('<br>')
+    description Faker::Lorem.paragraphs(paragraph_count = Random.rand(1..10)).join('<br>')
     ticket_price Random.rand(0..1000.0)
 
     #a Raffle must have an end_time and/or a ticket_max must be specified. Here we make it random

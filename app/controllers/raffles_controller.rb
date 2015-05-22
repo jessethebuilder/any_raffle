@@ -1,6 +1,10 @@
 class RafflesController < ApplicationController
   before_action :set_raffle, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user!, only: [:new]
+  before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+
+  def welcome
+
+  end
 
   # GET /raffles
   def index
@@ -55,6 +59,8 @@ class RafflesController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def raffle_params
       params.require(:raffle).permit(:user_id, :title, :description, :image, :end_time, :ticket_max, :ticket_price,
-                                     :image, :remote_image_url, :image_cache)
+                                     :image, :remote_image_url, :image_cache,
+                                     :bootsy_image_gallery_id
+                                    )
     end
 end
