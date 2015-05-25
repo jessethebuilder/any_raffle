@@ -2,7 +2,15 @@ Rails.application.routes.draw do
   mount Bootsy::Engine => '/bootsy', as: 'bootsy'
   resources :prizes
   resources :tickets, :except => [:destroy]
-  resources :raffles
+
+
+  resources :raffles do
+    member do
+      get 'add_prize'
+    end
+  end
+
+
   devise_for :users
 
   root 'raffles#index'

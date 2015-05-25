@@ -1,9 +1,15 @@
 class RafflesController < ApplicationController
   before_action :set_raffle, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_filter :authenticate_user!, only: [:edit, :update, :destroy]
 
   def welcome
 
+  end
+
+  #Ajax
+  def add_prize
+    @raffle = Raffle.new
+    @raffle.prizes.new
   end
 
   # GET /raffles
@@ -18,6 +24,7 @@ class RafflesController < ApplicationController
   # GET /raffles/new
   def new
     @raffle = Raffle.new
+    @raffle.prizes.new
   end
 
   # GET /raffles/1/edit

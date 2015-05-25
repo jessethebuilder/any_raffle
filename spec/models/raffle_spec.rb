@@ -12,7 +12,7 @@ RSpec.describe Raffle, type: :model do
 
     it{ should validate_numericality_of(:ticket_max).is_greater_than_or_equal_to(1) }
 
-    it{ should validate_presence_of :user_id }
+    # it{ should validate_presence_of :user_id }
 
     describe ':end_time validations' do
       before(:each) do
@@ -127,6 +127,19 @@ RSpec.describe Raffle, type: :model do
         raffle.active?.should == true
       end
     end #active
+
+    describe '#tickets_left' do
+      it 'should return the number of tickets left' do
+        raffle.ticket_max = 100
+        raffle.tickets << create(:ticket)
+        raffle.tickets_left.should == 99
+      end
+
+      it 'should return nil if no ticket_max is specified' do
+        raf = create(:raffle_with_end_time)
+        raf.tickets_left.should == nil
+      end
+    end #tickets_left
   end #Methods
 
 

@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 describe 'New Raffle Requests', :type => :feature do
-  context 'User is signed in' do
+  # context 'User is signed in' do
     before(:each) do
-      manual_sign_in
+      # manual_sign_in
       visit '/raffles/new'
     end
 
@@ -31,7 +31,7 @@ describe 'New Raffle Requests', :type => :feature do
       specify 'Minimum Parameters' do
         fill_in 'Title', with: 'A Title'
         description = Faker::Lorem.paragraphs(paragraph_count = Random.rand(1..10)).join('<br><br>')
-        fill_in 'Description', with: description
+        find(:css, '#raffle_description').set(description)
         fill_in 'Ticket price', with: 1.00
         fill_in 'End time', with: Time.now + Random.rand(1..1000).hours
         expect{ click_button 'Create' }.to change{ Raffle.count }.by(1)
@@ -43,27 +43,33 @@ describe 'New Raffle Requests', :type => :feature do
       end
     end
 
-  end #User signed in
+  # describe 'Prizes' do
+  #   specify 'There should be an embedded form for 1 prize' do
+  #     false
+  #   end
+  # end
 
-  context 'User is not signed in' do
-    before(:each) do
-      visit '/raffles/new'
-    end
+  # end #User signed in
 
-    it 'should redirect user to sign in' do
-      page.current_path.should == '/users/sign_in'
-    end
+  # context 'User is not signed in' do
+  #   before(:each) do
+  #     visit '/raffles/new'
+  #   end
 
-    specify 'after sign up, user redirects back to #new' do
-      click_link 'Sign up'
+    # it 'should redirect user to sign in' do
+    #   page.current_path.should == '/users/sign_in'w
+    # end
 
-      password = 'a;kldsjfaskn399dkD23'
-      fill_in 'Email', with: Faker::Internet.email
-      fill_in 'Password', with: password
-      fill_in 'Password confirmation', with: password
-      click_button 'Sign up'
-
-      page.current_path.should == "/raffles/new"
-    end
-  end #User is NOT signed in
+    # specify 'after sign up, user redirects back to #new' do
+    #   click_link 'Sign up'
+    #
+    #   password = 'a;kldsjfaskn399dkD23'
+    #   fill_in 'Email', with: Faker::Internet.email
+    #   fill_in 'Password', with: password
+    #   fill_in 'Password confirmation', with: password
+    #   click_button 'Sign up'
+    #
+    #   page.current_path.should == "/raffles/new"
+    # end
+  # end #User is NOT signed in
 end

@@ -24,6 +24,16 @@ FactoryGirl.define do
         ticket_max Random.rand(1..100000)
     end
 
+    factory :raffle_with_end_time do
+      end_time Time.now + Random.rand(1..10000).minutes
+      ticket_max nil
+    end
+
+    factory :raffle_with_ticket_max do
+      ticket_max Random.rand(1..100000)
+      end_time nil
+    end
+
     # factory :raffle_with_image do
     #   image Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/support/test_image.jpg')))
     # end

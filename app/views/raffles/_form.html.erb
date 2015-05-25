@@ -5,7 +5,7 @@
     </div><!-- col -->
   </div><!-- row -->
 
-  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :user_id, value: current_user.id if user_signed_in? -%>
 
   <div class="row">
     <div class="col-sm-4">
@@ -15,13 +15,19 @@
         <%= f.text_field :title, class: 'form-control'%>
       </div>
     </div><!-- col -->
+
     <div class="col-sm-4">
       <div class="form-group">
         <%= f.label :ticket_price, class: 'control-label' %>
         <%= f.text_field :ticket_price, class: 'form-control' %>
       </div>
     </div><!-- col -->
+
     <div class="col-sm-4">
+      <div class="form-group">
+        <%= f.label :paypal_email, class: 'control-label' %>
+        <%= f.email_field :paypal_email, :class => 'form-control' %>
+      </div>
     </div><!-- col -->
   </div><!-- row -->
   <div class="row">
@@ -55,12 +61,21 @@
     <div class="col-sm-12">
       <div class="form-group">
         <%= f.label :description, class: 'control-label' %>
-        <%= f.bootsy_area :description, class: 'form-control' %>
+        <%= f.bootsy_area :description, class: 'form-control', id: 'raffle_description' %>
       </div>
     </div><!-- col -->
   </div><!-- row -->
   <%= image_select f, :image %><!-- row -->
 
+  <div class="prizes">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Prizes</h2>
+      </div>
+    </div>
+    <%= render partial: 'prizes/embedded_form', :locals => {:form_builder => f} %><!-- row -->
+
+  </div><!-- prizes -->
 
   <div class="row">
     <div class="col-sm-12">

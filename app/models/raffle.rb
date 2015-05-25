@@ -14,7 +14,7 @@ class Raffle < ActiveRecord::Base
 
   validates :ticket_max, :numericality => {:greater_than_or_equal_to => 1, :only_integer => true, :allow_blank => true}
 
-  validates :user_id, presence: true
+  # validates :user_id, presence: true
 
   validate :ticket_max_or_end_time
   validate :end_time_is_in_future, :on => :create
@@ -33,6 +33,10 @@ class Raffle < ActiveRecord::Base
 
   def active?
     tickets.count > 0
+  end
+
+  def tickets_left
+    ticket_max - tickets.count if ticket_max
   end
 
   private

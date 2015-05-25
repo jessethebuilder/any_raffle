@@ -1,15 +1,17 @@
 /*------------------------------------------------------------------
 - The Flash
 ------------------------------------------------------------------*/
-.flash{
-  margin-top: 10px;
-  margin-bottom: 10px;
+div.flash{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 10px;
+  text-align: center;
 }
 
-.flash.alert{
+div.flash.alert{
   background-color: $alert-danger-bg;
 }
 
-.flash.notice{
-  background-notice: $alert-warning-bg;
+div.flash.notice{
+  background-color: $alert-warning-bg;
 }

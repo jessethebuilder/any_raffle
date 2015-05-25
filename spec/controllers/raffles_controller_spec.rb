@@ -58,17 +58,22 @@ RSpec.describe RafflesController, type: :controller do
   end
 
   describe "GET #new" do
-    it 'cannot be accessed unless user is signed in' do
-      get :new, {}, valid_session
-      expect(response).to redirect_to('/users/sign_in')
-      expect(assigns(:raffle)).to be_nil
-    end
+    # it 'cannot be accessed unless user is signed in' do
+    #   get :new, {}, valid_session
+    #   expect(response).to redirect_to('/users/sign_in')
+    #   expect(assigns(:raffle)).to be_nil
+    # end
 
     it "assigns a new raffle as @raffle" do
-      login_user
+      # login_user
       get :new, {}, valid_session
       expect(assigns(:raffle)).to be_a_new(Raffle)
     end
+
+    # it 'creates a prize' do
+    #   get :new, {}, valid_session
+    #   assigns(:raffle).prizes.count.should == 1
+    # end
   end
 
   describe "GET #edit" do

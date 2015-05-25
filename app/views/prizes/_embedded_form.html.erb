@@ -1,0 +1,26 @@
+<div class="row prize">
+  <%= form_builder.fields_for :prizes, :child_index => Time.now.to_i do |prize_fields| %>
+    <div class="col-sm-3">
+      <div class="form-group">
+        <%= prize_fields.label :name, :class => 'control-label' %>
+        <%= prize_fields.text_field :name, class: 'form-control' %>
+      </div>
+    </div><!-- col -->
+    <div class="col-sm-5">
+      <div class="form-group">
+        <%= prize_fields.label :description, class: 'control-label' %>
+        <%= prize_fields.text_field :description, class: 'form-control' %>
+      </div>
+    </div><!-- col -->
+    <div class="col-sm-2">
+      <div class="form-group">
+        <%= prize_fields.label :value, class: 'control-label' %>
+        <%= prize_fields.text_field :value, class: 'form-control' %>
+      </div>
+    </div><!-- col -->
+    <div class="col-sm-2">
+      <%= prize_fields.label :cost, 'Actual cost', class: 'control-label' %>
+      <%= prize_fields.text_field :cost, class: 'form-control' %>
+    </div><!-- col -->
+  <% end %>
+</div><!-- row -->
