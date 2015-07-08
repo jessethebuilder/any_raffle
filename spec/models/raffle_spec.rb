@@ -12,7 +12,12 @@ RSpec.describe Raffle, type: :model do
 
     it{ should validate_numericality_of(:ticket_max).is_greater_than_or_equal_to(1) }
 
-    # it{ should validate_presence_of :user_id }
+    it 'should validate presence of at least one prize' do
+      pending
+      raffle.prizes.destroy_all
+      raffle.valid?.should == false
+      raffle.errors[:prizes].include?("can't be blank").should == true
+    end
 
     describe ':end_time validations' do
       before(:each) do
@@ -62,7 +67,7 @@ RSpec.describe Raffle, type: :model do
         raffle.end_time = Time.now + Random.rand(1..10000).hours
         raffle.valid?.should == true
 
-        raffle.tickets << create(:ticket)
+        raffle.active = true
         raffle.end_time = Time.now + Random.rand(1..10000).hours
         raffle.valid?.should == false
         raffle.errors[:end_time].include?("can't be changed after a raffle has begun").should == true
@@ -72,7 +77,7 @@ RSpec.describe Raffle, type: :model do
         raffle.ticket_max = Random.rand(1..100000)
         raffle.valid?.should == true
 
-        raffle.tickets << create(:ticket)
+        raffle.active = true
         raffle.ticket_max = Random.rand(1..10000)
         raffle.valid?.should == false
         raffle.errors[:ticket_max].include?("can't be changed after a raffle has begun")
@@ -80,8 +85,8 @@ RSpec.describe Raffle, type: :model do
 
       specify 'A Raffle cannot be deleted, after a ticket has sold' do
         raffle.tickets << create(:ticket)
+        raffle.destroy
         raffle.destroyed?.should == false
-        # raffle.errors[:base].include?("can't delete raffle once it is active").should == true
       end
     end
   end #Validations
@@ -120,14 +125,6 @@ RSpec.describe Raffle, type: :model do
       end
     end #pick
 
-    describe '#active?' do
-      specify 'a Raffle is "active" once a ticket has been sold' do
-        raffle.active?.should == false
-        raffle.tickets << ticket
-        raffle.active?.should == true
-      end
-    end #active
-
     describe '#tickets_left' do
       it 'should return the number of tickets left' do
         raffle.ticket_max = 100
@@ -142,5 +139,17 @@ RSpec.describe Raffle, type: :model do
     end #tickets_left
   end #Methods
 
+  describe 'Attributes' do
+    describe ':active' do
+      it 'should default to false' do
+        raffle.active.should == false
+        raffle.active.should_not == nil
+      end
+
+
+
+
+    end
+  end #Attributes
 
 end

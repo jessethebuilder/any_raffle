@@ -1,0 +1,23 @@
+/*------------------------------
+- Typography
+- Navbar
+- Grid System
+------------------------------*/
+//---- Typography --
+$font-size-base: 20px;
+
+$headings-font-family: 'Sigmar One', cursive;
+$headings-small-color: $shade_light;
+
+//--- Navbar ----
+$navbar-inverse-link-color: $shade_light;
+$navbar-inverse-link-hover-color: $dark_bi_color_1;
+$navbar-height: 70px;
+$navbar-inverse-bg: $shade_dark;
+
+$navbar-inverse-brand-color: $shade_light;
+$navbar-inverse-brand-hover-color: $dark_bi_color_2;
+
+//--- Grid System ---
+$grid-gutter-width: 10px;
+

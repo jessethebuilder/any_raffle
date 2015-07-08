@@ -8,10 +8,11 @@ FactoryGirl.define do
   end
 
   factory :raffle do
-    user
+    # user
     title Faker::Commerce.product_name
     description Faker::Lorem.paragraphs(paragraph_count = Random.rand(1..10)).join('<br>')
     ticket_price Random.rand(0..1000.0)
+    # association :prizes, factory: :prize
 
     #a Raffle must have an end_time and/or a ticket_max must be specified. Here we make it random
     case Random.rand(1..3)
@@ -23,6 +24,10 @@ FactoryGirl.define do
         end_time Time.now + Random.rand(1..10000).minutes
         ticket_max Random.rand(1..100000)
     end
+
+    # after(:build)do |r, eval|
+    #   r.prizes << build(:prize)
+    # end
 
     factory :raffle_with_end_time do
       end_time Time.now + Random.rand(1..10000).minutes
@@ -40,7 +45,6 @@ FactoryGirl.define do
   end
 
   factory :prize do
-    raffle
     name Faker::Commerce.product_name
   end
 

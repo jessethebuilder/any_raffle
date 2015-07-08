@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'home', to: 'pages#home', as: 'home'
+
+  root 'pages#home'
+
   mount Bootsy::Engine => '/bootsy', as: 'bootsy'
   resources :prizes
   resources :tickets, :except => [:destroy]
@@ -11,9 +15,9 @@ Rails.application.routes.draw do
   end
 
 
+
   devise_for :users
 
-  root 'raffles#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

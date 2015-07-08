@@ -2,8 +2,8 @@ module RequestsHelper
   def fill_in_valid_raffle
     visit '/raffles/new'
     fill_in 'Title', with: Faker::Commerce.product_name
-    find(:css, "textarea[id='raffle_description']").set Faker::Lorem.paragraphs(paragraph_count = Random.rand(1..10)).join('<br><br>')
-
+    # find(:css, "textarea[id='raffle_description']").set Faker::Lorem.paragraphs(paragraph_count = Random.rand(1..10)).join('<br><br>')
+    fill_in 'Description', with: Faker::Lorem.paragraphs(paragraph_count = Random.rand(1..10)).join('<br><br>')
     # fill_in '#raffle_description', with: Faker::Lorem.paragraphs(paragraph_count = Random.rand(1..10)).join('<br><br>')
     fill_in 'Ticket price', with: Random.rand(0..1000.0)
 

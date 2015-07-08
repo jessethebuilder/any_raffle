@@ -1,0 +1,7 @@
+@import url(http://fonts.googleapis.com/css?family=Sigmar+One);
+
+
+small{
+  color: $shade_light;
+  @include text_shadow(2px, $shade_dark);
+}

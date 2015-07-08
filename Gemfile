@@ -69,7 +69,10 @@ group :test do
   gem 'shoulda'
   gem 'launchy', '~> 2.3.0'
   #gem 'webrat'
+  gem 'poltergeist'
 end
+
+gem 'cliver', :git => 'git://github.com/yaauie/cliver', :ref => '5617ce'
 
 group :production do
   gem 'rails_12factor'

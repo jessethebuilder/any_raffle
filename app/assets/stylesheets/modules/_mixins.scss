@@ -1,0 +1,10 @@
+@mixin border_radius($rad){
+  -webkit-border-radius: $rad;
+  -moz-border-radius: $rad;
+  -ms-border-radius: $rad;
+  border-radius: $rad;
+}
+
+@mixin text_shadow($width, $color){
+  text-shadow: ($width - 2($width)) 0 $color, 0 $width $color, $width 0 $color, 0 ($width - 2($width)) $color;
+}

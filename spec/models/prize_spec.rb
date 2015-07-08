@@ -4,11 +4,12 @@ RSpec.describe Prize, type: :model do
   let(:prize){ build :prize }
 
   describe 'Validations' do
-    it{ should validate_presence_of :raffle_id }
+    # it{ should validate_presence_of :raffle_id }
 
     it{ should validate_presence_of :name }
 
     specify "Prize cannot be deleted once its raffle is active" do
+      prize.raffle = build(:raffle, :active => true)
       prize.save!
       prize.raffle.tickets << create(:ticket)
       prize.destroy
@@ -22,10 +23,13 @@ RSpec.describe Prize, type: :model do
   end
 
   describe 'Methods' do
+
     describe '#pick_winner' do
       before(:each) do
         #create a raffle with 1 ticket
-        r = prize.raffle
+        r = create(:raffle)
+        prize.raffle = r
+        prize.save!
         r.tickets << create(:ticket)
       end
 
@@ -54,8 +58,8 @@ RSpec.describe Prize, type: :model do
     describe '#winner_selected?' do
       before(:each) do
         #create a raffle with 1 ticket
-        r = prize.raffle
-        r.tickets << create(:ticket)
+        prize.raffle = create(:raffle)
+        prize.raffle.tickets << create(:ticket)
       end
 
       it 'should be true for any prize that has a ticket associated with it' do

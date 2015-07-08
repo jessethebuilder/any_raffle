@@ -1,6 +1,14 @@
 /*------------------------------------------------------------------
+- #top_nav
 - The Flash
 ------------------------------------------------------------------*/
+//--- #top_nav
+// additional customizations in /vendor/bootstrap_customizations.scss
+#top_nav{
+  font-family: 'Sigmar One', cursive;
+}
+
+//--- The Flash
 div.flash{
   margin-top: 5px;
   margin-bottom: 5px;

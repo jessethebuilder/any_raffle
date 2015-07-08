@@ -1,0 +1,23 @@
+/*--------------------------------------------------------------------
+  - Body
+  - Content Blocks
+
+--------------------------------------------------------------------*/
+
+//--- Body
+body{
+  // the colors in the background are $dark_bi_color_1 and _2, but for some reason,
+  // they don't work as SASS variables here.
+  background: linear-gradient(90deg, #3e4cab 50%, #9c3049 50%);
+  height: 100%;
+}
+
+//--- Content Blocks
+.content_block{
+  background-color: $shade_medium;
+  @include border_radius(15px);
+  border: 2px solid $shade_dark;
+
+  padding: 10px;
+  margin-bottom: 20px;
+}

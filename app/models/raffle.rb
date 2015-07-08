@@ -20,7 +20,10 @@ class Raffle < ActiveRecord::Base
   validate :end_time_is_in_future, :on => :create
   validate :active_raffle_validations
 
-  before_destroy :prevent_if_active
+  #spec pending for this
+  # validate :at_least_one_prize
+
+  before_destroy :prevent_destroy_if_ticket_has_sold
 
   #FarmSlugs add presence validation its id_method
   use_farm_slugs id_method: :title
@@ -31,9 +34,9 @@ class Raffle < ActiveRecord::Base
    tickets.not_winners.sample
   end
 
-  def active?
-    tickets.count > 0
-  end
+  # def active?
+  #
+  # end
 
   def tickets_left
     ticket_max - tickets.count if ticket_max
@@ -41,8 +44,8 @@ class Raffle < ActiveRecord::Base
 
   private
 
-  def prevent_if_active
-    self.active? ? false : true
+  def prevent_destroy_if_ticket_has_sold
+    self.tickets.count > 0 ? false : true
   end
 
   def ticket_max_or_end_time
@@ -61,4 +64,8 @@ class Raffle < ActiveRecord::Base
       errors.add(:ticket_max, "can't be changed after a raffle has begun") if changed.include?('ticket_max')
     end
   end
+
+  # def at_least_one_prize
+  #   # errors.add(:prizes, "can't be blank") if self.prizes.count < 1
+  # end
 end

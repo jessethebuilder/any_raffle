@@ -20,6 +20,9 @@ RSpec.configure do |config|
   config.include ControllerSpecsHelper, type: :controller
   config.include RequestsHelper, type: :feature
 
+  require 'capybara/poltergeist'
+  Capybara.javascript_driver = :poltergeist
+
   config.infer_base_class_for_anonymous_controllers = false
 
   config.order = "random"

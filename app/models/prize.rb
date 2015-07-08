@@ -3,7 +3,7 @@ class Prize < ActiveRecord::Base
 
   has_one :ticket
 
-  validates :raffle_id, presence: true
+  # validates :raffle_id, presence: true
 
   validates :name, presence: true
 
