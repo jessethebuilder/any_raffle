@@ -1,0 +1,17 @@
+<div id="user_dashboard">
+  <% if current_user.raffles.count > 0 -%>
+    <ul class="raffle_list">
+      <h3>Your Raffles</h3>
+      <% current_user.raffles.each do |r| -%>
+        <li>
+          <%= link_to r.title, r %>
+        </li>
+      <% end -%>
+    </ul>
+  <% else -%>
+    <div>
+      Thank you for signing up. After you create your first Raffle, they will be listed here.
+    </div>
+  <% end -%>
+
+</div>

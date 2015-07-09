@@ -8,7 +8,7 @@ class Raffle < ActiveRecord::Base
   has_many :prizes
   accepts_nested_attributes_for :prizes, allow_destroy: true
 
-  validates :description, presence: true
+  # validates :description, presence: true
 
   validates :ticket_price, presence: true, numericality: {:greater_than_or_equal_to => 0}
 

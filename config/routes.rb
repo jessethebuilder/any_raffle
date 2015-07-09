@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   get 'home', to: 'pages#home', as: 'home'
+  # post 'home', to: 'pages#home'
 
   root 'pages#home'
+
+
 
   mount Bootsy::Engine => '/bootsy', as: 'bootsy'
   resources :prizes
@@ -15,8 +18,9 @@ Rails.application.routes.draw do
   end
 
 
-
   devise_for :users
+  # , :controllers => {sessions: 'sessions', registrations: 'registrations'}
+  # devise_for :users
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -72,4 +76,8 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  #--- Ajax ---
+  get 'terms_of_use', to: 'pages#terms_of_use', as: 'terms_of_use'
+  get 'show_user_login_form', to: 'pages#show_user_login_form', as: 'show_user_login_form'
 end

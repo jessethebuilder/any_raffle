@@ -1,0 +1,9 @@
+<div id="home_block_1" class="content_block">
+  <% if user_signed_in? -%>
+    <%= render partial: 'users/dashboard' %>
+
+  <% else -%>
+    <%= render partial: 'devise/registrations/new' %>
+  <% end -%>
+</div>
+

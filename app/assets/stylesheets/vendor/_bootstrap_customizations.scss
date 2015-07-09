@@ -2,8 +2,10 @@
 - Typography
 - Navbar
 - Grid System
+- Modal
 ------------------------------*/
 //---- Typography --
+$font-family-sans-serif: 'Droid Sans', sans-serif;
 $font-size-base: 20px;
 
 $headings-font-family: 'Sigmar One', cursive;
@@ -19,5 +21,7 @@ $navbar-inverse-brand-color: $shade_light;
 $navbar-inverse-brand-hover-color: $dark_bi_color_2;
 
 //--- Grid System ---
-$grid-gutter-width: 10px;
+$grid-gutter-width: 6px;
 
+//--- Modal ---
+$modal-content-bg: $shade_medium;

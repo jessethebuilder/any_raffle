@@ -20,7 +20,7 @@ describe 'New Raffle Requests', :type => :feature do
       it 'should announce the error in the flash' do
         click_button 'Create'
         page.should have_content "Title can't be blank"
-        page.should have_content "Description can't be blank"
+        # page.should have_content "Description can't be blank"
         page.should have_content "Ticket price can't be blank"
         page.should have_content "Ticket price is not a number"
       end

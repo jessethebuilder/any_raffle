@@ -1,0 +1,30 @@
+<div id="new_user">
+  <h3>Sign up <small>so you can track your raffle and sell tickets</small></h3>
+  <div>
+    <%= form_for :user, url: '/users' do |f| %>
+      <div class="form-group">
+        <%= f.label :email, class: 'control-label' %>
+        <%= f.email_field :email, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password, class: 'control-label' %>
+        <%= f.password_field :password, class: 'form-control', autocomplete: 'off' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation, class: 'control-label' %>
+        <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: 'off' %>
+      </div>
+
+      <div class="checkbox">
+        <label><%= f.check_box :terms_of_use %>I accept</label> <%= link_to "AnyRaffle's Terms of Use", terms_of_use_path, remote: true %>
+      </div>
+
+      <div class="form-group">
+        <%= f.submit 'Sign up', class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+
+</div><!-- #new_user -->
